@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { UserPlus, Shield, Trash2, Edit2, UserCheck, UserMinus } from 'lucide-react'
+import { useNavigate } from '@tanstack/react-router'
 
-// Tipado para mayor seguridad
 type User = {
   id: string;
   nombre: string;
@@ -19,6 +19,7 @@ const initialUsers: User[] = [
 
 export const UserManagement = () => {
   const [users] = useState<User[]>(initialUsers)
+  const navigate = useNavigate()
 
   return (
     <div className="space-y-6">
@@ -30,7 +31,7 @@ export const UserManagement = () => {
         </div>
 
         <button className="flex items-center justify-center gap-2 bg-zinc-100 hover:bg-white text-black px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg">
-          <UserPlus size={20} />
+          <UserPlus size={20} onClick={() => navigate({ to: '/dashboard/NewUserComponent' })}/>
           Nuevo Mecánico
         </button>
       </div>

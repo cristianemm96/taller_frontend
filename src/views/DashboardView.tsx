@@ -1,6 +1,6 @@
-import { FilterComponent } from "../features/dashboard/components/FilterComponent"
-import { HeaderComponent } from "../features/dashboard/components/HeaderComponent"
-import { TableComponent } from "../features/dashboard/components/TableComponent"
+import { FilterComponent } from "../features/dashboard/components/tablaRepuestos/FilterComponent"
+import { HeaderComponent } from "../features/dashboard/components/tablaRepuestos/HeaderComponent"
+import { TableComponent } from "../features/dashboard/components/tablaRepuestos/TableComponent"
 
 export const DashboardView = ()=>{
     return(

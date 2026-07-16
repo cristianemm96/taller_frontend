@@ -1,8 +1,12 @@
 import { ChevronDown, Search, SlidersHorizontal } from "lucide-react"
 import { useState } from "react";
+import { useFiltroStore } from "../../../../store/useFiltroStore";
 
 export const FilterComponent = () => {
   const [showFilters, setShowFilters] = useState(false);
+  const terminoBusqueda = useFiltroStore((state) => state.terminoBusqueda)
+  const setTerminoBusqueda = useFiltroStore((state) => state.setTerminoBusqueda)
+
   return (
     <div className="w-full px-4 sm:px-6">
       <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
@@ -10,6 +14,8 @@ export const FilterComponent = () => {
           <Search className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-500" size={18} />
           <input
             type="text"
+            value={terminoBusqueda}
+            onChange={(e) => setTerminoBusqueda(e.target.value)}
             placeholder="Buscar..."
             className="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 pl-10 pr-4 text-sm outline-none focus:border-orange-500"
           />

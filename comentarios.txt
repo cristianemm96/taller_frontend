@@ -1,5 +1,0 @@
-Roles de usuario: Encargado, mecanico
-Ubicaciones: Estantería -> 5 cajon
-
-Paginas: Agregar repuestos, Administrar usuarios, Generar lista de repuestos en falta, Logs de movimientos
-de repuestos.

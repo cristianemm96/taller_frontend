@@ -1,5 +1,5 @@
-export const HeaderComponent = ()=>{
-    return(
+export const HeaderComponent = () => {
+    return (
         <div className="flex">
             <div>
                 <h1>Taller mecanico</h1>

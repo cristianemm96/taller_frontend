@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
-import { Activity, ClipboardList, LayoutDashboard, Plus, Users } from 'lucide-react';
+import { Activity, ClipboardList, LayoutDashboard, Plus, ToolCase, Users } from 'lucide-react';
 import { useState } from 'react';
 
 
@@ -12,7 +12,9 @@ const navItems = [
   { to: '/dashboard/AddFormComponent', label: 'Agregar Repuesto', icon: Plus, roles: ['encargado'] },
   { to: '/dashboard/InventoryShortage', label: 'Lista de faltantes', icon: ClipboardList, roles: ['encargado', 'mecanico'] },
   { to: '/dashboard/UsersManagement', label: 'Gestión de usuarios', icon: Users, roles: ['encargado'] },
+  { to: '/dashboard/Orders', label: 'Ordenes', icon: ToolCase, roles: ['encargado'] },
   { to: '/dashboard/ActivityLogs', label: 'Movimientos', icon: Activity, roles: ['encargado'] },
+  
 ];
 
 function DashBoardLayout() {
@@ -74,7 +76,7 @@ function DashBoardLayout() {
                 </div>
             </header>
 
-            <main className="flex-1 overflow-y-auto p-4 md:p-8">
+            <main className="flex-1 p-6 md:p-8 overflow-y-auto">
                 <Outlet />
             </main>
 

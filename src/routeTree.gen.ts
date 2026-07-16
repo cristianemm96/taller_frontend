@@ -13,6 +13,8 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardUsersManagementRouteImport } from './routes/dashboard/UsersManagement'
+import { Route as DashboardOrdersRouteImport } from './routes/dashboard/Orders'
+import { Route as DashboardNewUserComponentRouteImport } from './routes/dashboard/NewUserComponent'
 import { Route as DashboardInventoryShortageRouteImport } from './routes/dashboard/InventoryShortage'
 import { Route as DashboardAddFormComponentRouteImport } from './routes/dashboard/AddFormComponent'
 import { Route as DashboardActivityLogsRouteImport } from './routes/dashboard/ActivityLogs'
@@ -36,6 +38,17 @@ const DashboardUsersManagementRoute =
   DashboardUsersManagementRouteImport.update({
     id: '/UsersManagement',
     path: '/UsersManagement',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardOrdersRoute = DashboardOrdersRouteImport.update({
+  id: '/Orders',
+  path: '/Orders',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardNewUserComponentRoute =
+  DashboardNewUserComponentRouteImport.update({
+    id: '/NewUserComponent',
+    path: '/NewUserComponent',
     getParentRoute: () => DashboardRoute,
   } as any)
 const DashboardInventoryShortageRoute =
@@ -62,6 +75,8 @@ export interface FileRoutesByFullPath {
   '/dashboard/ActivityLogs': typeof DashboardActivityLogsRoute
   '/dashboard/AddFormComponent': typeof DashboardAddFormComponentRoute
   '/dashboard/InventoryShortage': typeof DashboardInventoryShortageRoute
+  '/dashboard/NewUserComponent': typeof DashboardNewUserComponentRoute
+  '/dashboard/Orders': typeof DashboardOrdersRoute
   '/dashboard/UsersManagement': typeof DashboardUsersManagementRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -70,6 +85,8 @@ export interface FileRoutesByTo {
   '/dashboard/ActivityLogs': typeof DashboardActivityLogsRoute
   '/dashboard/AddFormComponent': typeof DashboardAddFormComponentRoute
   '/dashboard/InventoryShortage': typeof DashboardInventoryShortageRoute
+  '/dashboard/NewUserComponent': typeof DashboardNewUserComponentRoute
+  '/dashboard/Orders': typeof DashboardOrdersRoute
   '/dashboard/UsersManagement': typeof DashboardUsersManagementRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -80,6 +97,8 @@ export interface FileRoutesById {
   '/dashboard/ActivityLogs': typeof DashboardActivityLogsRoute
   '/dashboard/AddFormComponent': typeof DashboardAddFormComponentRoute
   '/dashboard/InventoryShortage': typeof DashboardInventoryShortageRoute
+  '/dashboard/NewUserComponent': typeof DashboardNewUserComponentRoute
+  '/dashboard/Orders': typeof DashboardOrdersRoute
   '/dashboard/UsersManagement': typeof DashboardUsersManagementRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -91,6 +110,8 @@ export interface FileRouteTypes {
     | '/dashboard/ActivityLogs'
     | '/dashboard/AddFormComponent'
     | '/dashboard/InventoryShortage'
+    | '/dashboard/NewUserComponent'
+    | '/dashboard/Orders'
     | '/dashboard/UsersManagement'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
@@ -99,6 +120,8 @@ export interface FileRouteTypes {
     | '/dashboard/ActivityLogs'
     | '/dashboard/AddFormComponent'
     | '/dashboard/InventoryShortage'
+    | '/dashboard/NewUserComponent'
+    | '/dashboard/Orders'
     | '/dashboard/UsersManagement'
     | '/dashboard'
   id:
@@ -108,6 +131,8 @@ export interface FileRouteTypes {
     | '/dashboard/ActivityLogs'
     | '/dashboard/AddFormComponent'
     | '/dashboard/InventoryShortage'
+    | '/dashboard/NewUserComponent'
+    | '/dashboard/Orders'
     | '/dashboard/UsersManagement'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
@@ -147,6 +172,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardUsersManagementRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/Orders': {
+      id: '/dashboard/Orders'
+      path: '/Orders'
+      fullPath: '/dashboard/Orders'
+      preLoaderRoute: typeof DashboardOrdersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/NewUserComponent': {
+      id: '/dashboard/NewUserComponent'
+      path: '/NewUserComponent'
+      fullPath: '/dashboard/NewUserComponent'
+      preLoaderRoute: typeof DashboardNewUserComponentRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/InventoryShortage': {
       id: '/dashboard/InventoryShortage'
       path: '/InventoryShortage'
@@ -175,6 +214,8 @@ interface DashboardRouteChildren {
   DashboardActivityLogsRoute: typeof DashboardActivityLogsRoute
   DashboardAddFormComponentRoute: typeof DashboardAddFormComponentRoute
   DashboardInventoryShortageRoute: typeof DashboardInventoryShortageRoute
+  DashboardNewUserComponentRoute: typeof DashboardNewUserComponentRoute
+  DashboardOrdersRoute: typeof DashboardOrdersRoute
   DashboardUsersManagementRoute: typeof DashboardUsersManagementRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
@@ -183,6 +224,8 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardActivityLogsRoute: DashboardActivityLogsRoute,
   DashboardAddFormComponentRoute: DashboardAddFormComponentRoute,
   DashboardInventoryShortageRoute: DashboardInventoryShortageRoute,
+  DashboardNewUserComponentRoute: DashboardNewUserComponentRoute,
+  DashboardOrdersRoute: DashboardOrdersRoute,
   DashboardUsersManagementRoute: DashboardUsersManagementRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
