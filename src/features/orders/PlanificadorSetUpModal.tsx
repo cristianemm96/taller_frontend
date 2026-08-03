@@ -5,6 +5,7 @@ import { ConstantesURL } from '../../constantes'
 import { SetDescriptionOrder } from './planificadorComponents/SetDescriptionOrder'
 import { HeaderModal } from './planificadorComponents/HeaderModal'
 import { SetMecanicoSeleccionadoComponent } from './planificadorComponents/SetMecanicoSeleccionadoComponent'
+import { apiFetch } from '../../utils/api'
 
 interface PlanificadorProps {
     isOpen: boolean
@@ -18,12 +19,6 @@ interface DetalleItem {
     stockMaximo?: number
 }
 
-const USUARIOS_MOCK = [
-    { id: 1, nombre: "Juan Carlos" },
-    { id: 3, nombre: "Federico" },
-    { id: 4, nombre: "Santiago" },
-]
-
 interface Usuario {
     id: number,
     nombre: string
@@ -34,20 +29,21 @@ export const PlanificadorSetUpModal = ({ isOpen, onClose }: PlanificadorProps) =
     const [descripcion, setDescripcion] = useState('')
     const [mecanicoSeleccionado, setMecanicoSeleccionado] = useState<Usuario | null>(null)
     const [detalles, setDetalles] = useState<DetalleItem[]>([])
+    const token = localStorage.getItem("token")
     const { data: repuestos } = useQuery({
         queryKey: ['repuestos'],
         queryFn: async () => {
-            const res = await fetch(`${ConstantesURL.repuesto}`)
+            const res = await apiFetch(`${ConstantesURL.repuesto}`,
+                {method: "GET"}
+            )
             return res.json()
-        }
+        },
+        enabled: !!token
     })
-    // const { data: usuarios } = useQuery({ ... })
-
     const crearOrdenMutation = useMutation({
         mutationFn: async (nuevaOrden: any) => {
-            const res = await fetch(`${ConstantesURL.ordenes}`, {
+            const res = await apiFetch(`${ConstantesURL.ordenes}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(nuevaOrden)
             })
             if (!res.ok) {
@@ -99,13 +95,19 @@ export const PlanificadorSetUpModal = ({ isOpen, onClose }: PlanificadorProps) =
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        if (!descripcion.trim()) return
+
+        const idMecanico = mecanicoSeleccionado?.id || mecanicoSeleccionado?.id || 0
+
         const payload = {
             descripcionTrabajo: descripcion,
-            mecanicoAsignado: mecanicoSeleccionado,
-            detalles: detalles.map(d => ({ repuestoId: d.repuestoId, cantidad: d.cantidad }))
+            mecanicoId: Number(idMecanico), 
+            detalles: detalles
+                .filter(d => d.repuestoId > 0)
+                .map(d => ({ 
+                    repuestoId: d.repuestoId, 
+                    cantidad: d.cantidad 
+                }))
         }
-
         crearOrdenMutation.mutate(payload)
     }
 

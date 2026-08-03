@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { ConstantesURL } from '../../constantes'
+import { apiFetch } from '../../utils/api'
 
 interface CategoriaSelectProps {
   categoriaIdSeleccionada: number | ''
@@ -12,7 +13,9 @@ export const CategoriaSelectComponent = ({
 }: CategoriaSelectProps) => {
   const { data: categorias, isLoading: cargandoCategorias } = useQuery({
     queryKey: ['categorias'],
-    queryFn: () => fetch(`${ConstantesURL.categoria}`)
+    queryFn: async() => apiFetch(`${ConstantesURL.categoria}`,
+      {method: "GET"}
+    )
                     .then(res => res.json())
                     .then(data => data.elementos)
   })

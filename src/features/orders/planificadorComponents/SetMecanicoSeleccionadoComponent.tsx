@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import type { Usuario } from "../../../types/usuarioType"
 import { ConstantesURL } from "../../../constantes"
+import { apiFetch } from "../../../utils/api"
 
 interface SetMecanicosProps {
     mecanicoSeleccionado: Usuario | null
@@ -8,19 +9,30 @@ interface SetMecanicosProps {
 }
 
 export const SetMecanicoSeleccionadoComponent = ({ mecanicoSeleccionado, setMecanicoSeleccionado }: SetMecanicosProps) => {
-    const {data: usuarios} = useQuery({
+    const token = localStorage.getItem("token")
+    const {data} = useQuery({
         queryKey:['usuarios'],
         queryFn: async()=>{
-            const res = await fetch(`${ConstantesURL.usuarios}`)
+            const res = await apiFetch(`${ConstantesURL.usuarios}`,
+                {method: "GET"}
+            )
             return res.json();
-        }
+        },
+        enabled: !!token
     })
+    const listaUsuarios: Usuario[] = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.elementos)
+        ? data.elementos
+        : Array.isArray(data?.data)
+        ? data.data
+        : [];
     
     return (
         <div className="space-y-1.5">
             <label className="text-[10px] uppercase font-black tracking-widest text-zinc-400">Mecánico Asignado</label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {usuarios?.map((u: Usuario) => {
+                {listaUsuarios.map((u: Usuario) => {
                     const seleccionado = u.id == mecanicoSeleccionado?.id
                     return (
                         <button

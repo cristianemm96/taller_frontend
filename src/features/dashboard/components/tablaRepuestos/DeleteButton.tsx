@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Trash2 } from 'lucide-react'
 import { ConstantesURL } from '../../../../constantes'
+import { apiFetch } from '../../../../utils/api'
 
 interface DeleteButtonProps {
     repuestoId: number
@@ -12,7 +13,7 @@ export const DeleteButton = ({ repuestoId, nombreComponente }: DeleteButtonProps
 
     const deleteMutation = useMutation({
         mutationFn: async (id: number) => {
-            const res = await fetch(`${ConstantesURL.repuesto}/${id}`, {
+            const res = await apiFetch(`${ConstantesURL.repuesto}/${id}`, {
                 method: 'DELETE',
             })
             if (!res.ok) throw new Error('No se pudo eliminar el repuesto')

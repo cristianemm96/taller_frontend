@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { PackageMinus, PackagePlus, AlertCircle } from 'lucide-react' 
 import { ConstantesURL } from '../../../../constantes'
+import { apiFetch } from '../../../../utils/api'
 
 export const ConsumoForm = ({ repuesto, onSuccess }: { repuesto: any, onSuccess: () => void }) => {
     const queryClient = useQueryClient()
@@ -12,7 +13,7 @@ export const ConsumoForm = ({ repuesto, onSuccess }: { repuesto: any, onSuccess:
     const stockMutation = useMutation({
         mutationFn: async (payload: { repuestoId: number; cantidad: number; usuarioId: number }) => {
             setErrorBackend(null) // Limpia errores previos al intentar
-            const res = await fetch(`${ConstantesURL.stock}/ajustar`, { 
+            const res = await apiFetch(`${ConstantesURL.stock}/ajustar`, { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

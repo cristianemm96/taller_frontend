@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query'
 import { Plus, X } from 'lucide-react';
 import { FormNuevaEstanteria } from './FormNuevaEstanteria';
 import { ConstantesURL } from '../../constantes';
+import { apiFetch } from '../../utils/api';
 
 type UbicacionProps = {
   cajonIdSeleccionado: number;
-  onCajonChange: (id: number) => void; 
+  onCajonChange: (id: number) => void;
 }
 
 export const UbicacionComponent = ({ cajonIdSeleccionado, onCajonChange }: UbicacionProps) => {
@@ -15,12 +16,16 @@ export const UbicacionComponent = ({ cajonIdSeleccionado, onCajonChange }: Ubica
 
   const { data: estanterias, isLoading: cargandoEstanterias } = useQuery({
     queryKey: ['estanterias'],
-    queryFn: () => fetch(`${ConstantesURL.estanteria}`).then(res => res.json().then(data => data.elementos))
+    queryFn: async() => await apiFetch(`${ConstantesURL.estanteria}`,
+      {method: "GET"}
+    ).then(res => res.json().then(data => data.elementos))
   })
 
   const { data: cajones, isLoading: cargandoCajones } = useQuery({
     queryKey: ['cajones', estanteriaId],
-    queryFn: () => fetch(`${ConstantesURL.estanteria}/${estanteriaId}/cajones`).then(res => res.json()),
+    queryFn: async () => await apiFetch(`${ConstantesURL.estanteria}/${estanteriaId}/cajones`,
+      { method: "GET" }
+    ).then(res => res.json()),
     enabled: estanteriaId !== ''
   })
 

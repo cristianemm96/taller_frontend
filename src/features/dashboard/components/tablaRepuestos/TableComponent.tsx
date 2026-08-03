@@ -6,22 +6,28 @@ import type { Repuesto } from '../../../../types/repuestoType'
 import { DeleteButton } from './DeleteButton'
 import { QuickActionModal } from './QuickActionModal'
 import { useFiltroStore } from '../../../../store/useFiltroStore'
+import { apiFetch } from '../../../../utils/api'
 
 export const TableComponent = () => {
     const [repuestoAccionRapida, setRepuestoAccionRapida] = useState<Repuesto | null>(null)
     const termino = useFiltroStore((state) => state.terminoBusqueda)
     const categoriaId = useFiltroStore((state) => state.categoriaSeleccionada)
+    const token = localStorage.getItem("token");
 
     const { data: respuesta, isLoading, isError } = useQuery({
         queryKey: ['repuestos'],
         queryFn: async () => {
-            const res = await fetch(`${ConstantesURL.repuesto}`)
-            if (!res.ok) throw new Error('Error al traer los repuestos')
-            return res.json()
-        }
+            const response = await apiFetch(`${ConstantesURL.repuesto}`, {
+                method: 'GET'
+            });
+            if (!response.ok) throw new Error('Error al traer los repuestos')
+            return response.json()
+        },
+        enabled: !!token
     })
 
     const repuestosResp: Repuesto[] = respuesta?.elementos || []
+    console.log(repuestosResp)
     const repuestosFiltrados = repuestosResp.filter((item) => {
         // Filtro por término de búsqueda
         const coincideTermino =

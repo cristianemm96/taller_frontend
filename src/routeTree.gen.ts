@@ -15,6 +15,7 @@ import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardUsersManagementRouteImport } from './routes/dashboard/UsersManagement'
 import { Route as DashboardOrdersRouteImport } from './routes/dashboard/Orders'
 import { Route as DashboardNewUserComponentRouteImport } from './routes/dashboard/NewUserComponent'
+import { Route as DashboardMecanicoOrdenesRouteImport } from './routes/dashboard/MecanicoOrdenes'
 import { Route as DashboardInventoryShortageRouteImport } from './routes/dashboard/InventoryShortage'
 import { Route as DashboardAddFormComponentRouteImport } from './routes/dashboard/AddFormComponent'
 import { Route as DashboardActivityLogsRouteImport } from './routes/dashboard/ActivityLogs'
@@ -51,6 +52,12 @@ const DashboardNewUserComponentRoute =
     path: '/NewUserComponent',
     getParentRoute: () => DashboardRoute,
   } as any)
+const DashboardMecanicoOrdenesRoute =
+  DashboardMecanicoOrdenesRouteImport.update({
+    id: '/MecanicoOrdenes',
+    path: '/MecanicoOrdenes',
+    getParentRoute: () => DashboardRoute,
+  } as any)
 const DashboardInventoryShortageRoute =
   DashboardInventoryShortageRouteImport.update({
     id: '/InventoryShortage',
@@ -75,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/ActivityLogs': typeof DashboardActivityLogsRoute
   '/dashboard/AddFormComponent': typeof DashboardAddFormComponentRoute
   '/dashboard/InventoryShortage': typeof DashboardInventoryShortageRoute
+  '/dashboard/MecanicoOrdenes': typeof DashboardMecanicoOrdenesRoute
   '/dashboard/NewUserComponent': typeof DashboardNewUserComponentRoute
   '/dashboard/Orders': typeof DashboardOrdersRoute
   '/dashboard/UsersManagement': typeof DashboardUsersManagementRoute
@@ -85,6 +93,7 @@ export interface FileRoutesByTo {
   '/dashboard/ActivityLogs': typeof DashboardActivityLogsRoute
   '/dashboard/AddFormComponent': typeof DashboardAddFormComponentRoute
   '/dashboard/InventoryShortage': typeof DashboardInventoryShortageRoute
+  '/dashboard/MecanicoOrdenes': typeof DashboardMecanicoOrdenesRoute
   '/dashboard/NewUserComponent': typeof DashboardNewUserComponentRoute
   '/dashboard/Orders': typeof DashboardOrdersRoute
   '/dashboard/UsersManagement': typeof DashboardUsersManagementRoute
@@ -97,6 +106,7 @@ export interface FileRoutesById {
   '/dashboard/ActivityLogs': typeof DashboardActivityLogsRoute
   '/dashboard/AddFormComponent': typeof DashboardAddFormComponentRoute
   '/dashboard/InventoryShortage': typeof DashboardInventoryShortageRoute
+  '/dashboard/MecanicoOrdenes': typeof DashboardMecanicoOrdenesRoute
   '/dashboard/NewUserComponent': typeof DashboardNewUserComponentRoute
   '/dashboard/Orders': typeof DashboardOrdersRoute
   '/dashboard/UsersManagement': typeof DashboardUsersManagementRoute
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/dashboard/ActivityLogs'
     | '/dashboard/AddFormComponent'
     | '/dashboard/InventoryShortage'
+    | '/dashboard/MecanicoOrdenes'
     | '/dashboard/NewUserComponent'
     | '/dashboard/Orders'
     | '/dashboard/UsersManagement'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/dashboard/ActivityLogs'
     | '/dashboard/AddFormComponent'
     | '/dashboard/InventoryShortage'
+    | '/dashboard/MecanicoOrdenes'
     | '/dashboard/NewUserComponent'
     | '/dashboard/Orders'
     | '/dashboard/UsersManagement'
@@ -131,6 +143,7 @@ export interface FileRouteTypes {
     | '/dashboard/ActivityLogs'
     | '/dashboard/AddFormComponent'
     | '/dashboard/InventoryShortage'
+    | '/dashboard/MecanicoOrdenes'
     | '/dashboard/NewUserComponent'
     | '/dashboard/Orders'
     | '/dashboard/UsersManagement'
@@ -186,6 +199,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardNewUserComponentRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/MecanicoOrdenes': {
+      id: '/dashboard/MecanicoOrdenes'
+      path: '/MecanicoOrdenes'
+      fullPath: '/dashboard/MecanicoOrdenes'
+      preLoaderRoute: typeof DashboardMecanicoOrdenesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/InventoryShortage': {
       id: '/dashboard/InventoryShortage'
       path: '/InventoryShortage'
@@ -214,6 +234,7 @@ interface DashboardRouteChildren {
   DashboardActivityLogsRoute: typeof DashboardActivityLogsRoute
   DashboardAddFormComponentRoute: typeof DashboardAddFormComponentRoute
   DashboardInventoryShortageRoute: typeof DashboardInventoryShortageRoute
+  DashboardMecanicoOrdenesRoute: typeof DashboardMecanicoOrdenesRoute
   DashboardNewUserComponentRoute: typeof DashboardNewUserComponentRoute
   DashboardOrdersRoute: typeof DashboardOrdersRoute
   DashboardUsersManagementRoute: typeof DashboardUsersManagementRoute
@@ -224,6 +245,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardActivityLogsRoute: DashboardActivityLogsRoute,
   DashboardAddFormComponentRoute: DashboardAddFormComponentRoute,
   DashboardInventoryShortageRoute: DashboardInventoryShortageRoute,
+  DashboardMecanicoOrdenesRoute: DashboardMecanicoOrdenesRoute,
   DashboardNewUserComponentRoute: DashboardNewUserComponentRoute,
   DashboardOrdersRoute: DashboardOrdersRoute,
   DashboardUsersManagementRoute: DashboardUsersManagementRoute,

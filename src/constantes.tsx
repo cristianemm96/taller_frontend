@@ -4,5 +4,7 @@ export const ConstantesURL = {
     categoria: "http://localhost:5136/api/categoria",
     stock: "http://localhost:5136/api/stock",
     ordenes: "http://localhost:5136/api/ordenes",
-    usuarios: "http://localhost:5136/api/usuarios"
+    usuarios: "http://localhost:5136/api/usuario",
+    rol: "http://localhost:5136/api/rol",
+    auth: "http://localhost:5136/api/Auth/login"
 }

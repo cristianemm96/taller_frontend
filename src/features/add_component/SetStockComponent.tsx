@@ -14,8 +14,15 @@ export const SetStockComponent = ({ formData, setFormData }: SetStockProps) => {
             <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Stock Inicial</label>
             <input
                 type="number"
+                value={formData.stockInicial ?? 0}
                 className="bg-zinc-900 border border-zinc-700 rounded-lg p-2.5 text-sm text-zinc-200 outline-none"
-                onChange={(e) => setFormData({ ...formData, stockDisponible: parseInt(e.target.value) })}
+                onChange={(e) => {
+                    const val = parseInt(e.target.value);
+                    setFormData({
+                        ...formData,
+                        stockInicial: isNaN(val) ? 0 : val 
+                    });
+                }}
             />
         </div>
     )

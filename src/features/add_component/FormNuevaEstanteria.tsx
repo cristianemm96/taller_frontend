@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
 import { ConstantesURL } from '../../constantes'
+import { apiFetch } from '../../utils/api'
 
 type FormProps = {
   onSuccessClose: () => void // Avisa al modal que se cierre al terminar
@@ -13,9 +14,8 @@ export const FormNuevaEstanteria = ({ onSuccessClose }: FormProps) => {
 
   const mutation = useMutation({
     mutationFn: async (nombreEstanteria: string) => {
-      const res = await fetch(`${ConstantesURL.estanteria}`, {
+      const res = await apiFetch(`${ConstantesURL.estanteria}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre: nombreEstanteria })
       })
       if (!res.ok) throw new Error('No se pudo crear')

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { MapPin, Loader2 } from 'lucide-react'
 import { ConstantesURL } from '../../../../constantes'
+import { apiFetch } from '../../../../utils/api'
 
 export const UbicacionForm = ({ repuesto, onSuccess }: { repuesto: any, onSuccess: () => void }) => {
     const queryClient = useQueryClient()
@@ -9,7 +10,9 @@ export const UbicacionForm = ({ repuesto, onSuccess }: { repuesto: any, onSucces
     const { data: estanterias = [], isLoading } = useQuery<any[]>({
         queryKey: ['estanterias-mapa'],
         queryFn: async () => {
-            const res = await fetch(`${ConstantesURL.estanteria}/mapa`)
+            const res = await apiFetch(`${ConstantesURL.estanteria}/mapa`,
+                { method: 'GET' }
+            )
             return res.json()
         }
     })
@@ -30,7 +33,7 @@ export const UbicacionForm = ({ repuesto, onSuccess }: { repuesto: any, onSucces
 
     const moverMutation = useMutation({
         mutationFn: async () => {
-            const res = await fetch(`${ConstantesURL.stock}/${repuesto.id}/mover`, {
+            const res = await apiFetch(`${ConstantesURL.stock}/${repuesto.id}/mover`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

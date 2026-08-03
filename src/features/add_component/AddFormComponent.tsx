@@ -10,6 +10,7 @@ import { CodeReferenceComponent } from './CodeReferenceComponent'
 import { SetStockComponent } from './SetStockComponent'
 import { SubmitButtonForm } from './SubmitButton'
 import { TitleFormComponent } from './TitleFormComponent'
+import { apiFetch } from '../../utils/api'
 
 export const AddFormComponent = () => {
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ export const AddFormComponent = () => {
   // Estado local
   const [formData, setFormData] = useState<RepuestoForm>({
     nombreComponente: '',
-    stockDisponible: 0,
+    stockInicial: 0,
     categoriaId: '' as number | '',
     codReferencia: '',
     ubicacionCajon: 0
@@ -26,14 +27,10 @@ export const AddFormComponent = () => {
 
   const mutation = useMutation({
     mutationFn: async (nuevoRepuesto: typeof formData) => {
-      const response = await fetch(`${ConstantesURL.repuesto}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Actualizar con token de usuario
-        },
-        body: JSON.stringify(nuevoRepuesto)
-      })
+      const response = await apiFetch(`${ConstantesURL.repuesto}`, {
+      method: 'POST',
+      body: JSON.stringify(nuevoRepuesto)
+    });
 
       if (!response.ok) {
         throw new Error('No se pudo guardar el repuesto en el servidor de C#')
